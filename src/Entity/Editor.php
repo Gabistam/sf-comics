@@ -29,16 +29,6 @@ class Editor
      */
     private $country;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Comics::class, mappedBy="editor")
-     */
-    private $comics;
-
-    public function __construct()
-    {
-        $this->comics = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -59,42 +49,5 @@ class Editor
     public function getCountry(): ?string
     {
         return $this->country;
-    }
-
-    public function setCountry(string $country): self
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Comics[]
-     */
-    public function getComics(): Collection
-    {
-        return $this->comics;
-    }
-
-    public function addComic(Comics $comic): self
-    {
-        if (!$this->comics->contains($comic)) {
-            $this->comics[] = $comic;
-            $comic->setEditor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComic(Comics $comic): self
-    {
-        if ($this->comics->removeElement($comic)) {
-            // set the owning side to null (unless already changed)
-            if ($comic->getEditor() === $this) {
-                $comic->setEditor(null);
-            }
-        }
-
-        return $this;
     }
 }

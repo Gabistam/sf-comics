@@ -1,0 +1,23 @@
+{% extends "admin/adminBase.html.twig" %}
+
+{% block main %}
+
+	{% for product in comicses %}
+		<div class="container">
+			<div class="card" style="width: 50%;">
+				<img src="{{ asset('media/' ~ image.src) }}" alt="{{ image.alt }}">
+				<div class="card-body">
+
+					<h2>
+
+						<a href="{{ path("comics_show", {'id' : comics.id } ) }}">
+							<button type="button" class="btn btn-primary">{{ comics.title }}</button>
+						</a>
+					</h2>
+
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+
+{% endblock %}

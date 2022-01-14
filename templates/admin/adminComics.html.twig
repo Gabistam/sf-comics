@@ -1,0 +1,22 @@
+{% extends "admin/adminBase.html.twig" %}
+
+{% block main %}
+	{% for comics in comicses %}
+		<div class="container">
+			<div class="card" style="width: 50%;">
+				<img src="{{ asset('media/' ~ image.src) }}" alt="{{ image.alt }}">
+				<div class="card-body">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Titre :
+							{{ comics.title }}</li>
+						<li class="list-group-item">Description :
+							{{ comics.description }}</li>
+						<li class="list-group-item">Année de sortie :
+							{{ comics.year }}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+
+{% endblock %}

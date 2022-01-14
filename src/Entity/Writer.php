@@ -29,16 +29,6 @@ class Writer
      */
     private $country;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Comics::class, mappedBy="writer")
-     */
-    private $comics;
-
-    public function __construct()
-    {
-        $this->comics = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -64,36 +54,6 @@ class Writer
     public function setCountry(string $country): self
     {
         $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Comics[]
-     */
-    public function getComics(): Collection
-    {
-        return $this->comics;
-    }
-
-    public function addComic(Comics $comic): self
-    {
-        if (!$this->comics->contains($comic)) {
-            $this->comics[] = $comic;
-            $comic->setWriter($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComic(Comics $comic): self
-    {
-        if ($this->comics->removeElement($comic)) {
-            // set the owning side to null (unless already changed)
-            if ($comic->getWriter() === $this) {
-                $comic->setWriter(null);
-            }
-        }
 
         return $this;
     }

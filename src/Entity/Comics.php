@@ -35,34 +35,40 @@ class Comics
     private $year;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Licence::class)
-     */
-    private $licence;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Editor::class, inversedBy="comics")
-     */
-    private $editor;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Writer::class, inversedBy="comics")
-     */
-    private $writer;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Designer::class, inversedBy="comics")
+     * @ORM\OneToOne(targetEntity=Designer::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $designer;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="comics")
+     * @ORM\OneToOne(targetEntity=Editor::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $images;
+    private $editor;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Licence::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $licence;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Writer::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $writer;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="comics", orphanRemoval=true)
+     */
+    private $image;
 
     public function __construct()
     {
-        $this->images = new ArrayCollection();
+        $this->image = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -105,14 +111,14 @@ class Comics
         return $this;
     }
 
-    public function getLicence(): ?Licence
+    public function getDesigner(): ?Designer
     {
-        return $this->licence;
+        return $this->designer;
     }
 
-    public function setLicence(?Licence $licence): self
+    public function setDesigner(Designer $designer): self
     {
-        $this->licence = $licence;
+        $this->designer = $designer;
 
         return $this;
     }
@@ -122,9 +128,21 @@ class Comics
         return $this->editor;
     }
 
-    public function setEditor(?Editor $editor): self
+    public function setEditor(Editor $editor): self
     {
         $this->editor = $editor;
+
+        return $this;
+    }
+
+    public function getLicence(): ?Licence
+    {
+        return $this->licence;
+    }
+
+    public function setLicence(Licence $licence): self
+    {
+        $this->licence = $licence;
 
         return $this;
     }
@@ -134,21 +152,9 @@ class Comics
         return $this->writer;
     }
 
-    public function setWriter(?Writer $writer): self
+    public function setWriter(Writer $writer): self
     {
         $this->writer = $writer;
-
-        return $this;
-    }
-
-    public function getDesigner(): ?Designer
-    {
-        return $this->designer;
-    }
-
-    public function setDesigner(?Designer $designer): self
-    {
-        $this->designer = $designer;
 
         return $this;
     }
@@ -156,15 +162,15 @@ class Comics
     /**
      * @return Collection|Image[]
      */
-    public function getImages(): Collection
+    public function getImage(): Collection
     {
-        return $this->images;
+        return $this->image;
     }
 
     public function addImage(Image $image): self
     {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
+        if (!$this->image->contains($image)) {
+            $this->image[] = $image;
             $image->setComics($this);
         }
 
@@ -173,7 +179,7 @@ class Comics
 
     public function removeImage(Image $image): self
     {
-        if ($this->images->removeElement($image)) {
+        if ($this->image->removeElement($image)) {
             // set the owning side to null (unless already changed)
             if ($image->getComics() === $this) {
                 $image->setComics(null);
