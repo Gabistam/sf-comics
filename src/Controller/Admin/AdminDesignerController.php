@@ -52,17 +52,17 @@ class AdminDesignerController extends AbstractController
 
         if ($designerForm->isSubmitted() && $designerForm->isValid()) {
 
-            $mediaFile = $designerForm->get('media')->getData();
+            $imageFile = $designerForm->get('image')->getData();
 
-            if ($mediaFile) {
+            if ($imageFile) {
 
-                $originalFilename = pathinfo($mediaFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
 
                 $safeFilename = $sluggerInterface->slug($originalFilename);
 
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $mediaFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
-                $mediaFile->move(
+                $imageFile->move(
                     $this->getParameter('images_directory'),
                     $newFilename
                 );
@@ -97,17 +97,17 @@ class AdminDesignerController extends AbstractController
         if ($designerForm->isSubmitted() && $designerForm->isValid()) {
 
 
-            $mediaFile = $designerForm->get('media')->getData();
+            $imageFile = $designerForm->get('image')->getData();
 
-            if ($mediaFile) {
+            if ($imageFile) {
 
-                $originalFilename = pathinfo($mediaFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
 
                 $safeFilename = $sluggerInterface->slug($originalFilename);
 
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $mediaFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
-                $mediaFile->move(
+                $imageFile->move(
                     $this->getParameter('images_directory'),
                     $newFilename
                 );
