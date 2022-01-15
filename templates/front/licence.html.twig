@@ -1,4 +1,4 @@
-{% extends "front/base.html.twig" %}
+{% extends "admin/adminBase.html.twig" %}
 
 {% block main %}
 
@@ -7,12 +7,12 @@
 			<img src="https://picsum.photos/450/250" class="card-img-top" alt="...">
 			<div class="card-body">
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item">Titre :
-						{{ product.title }}</li>
+					<li class="list-group-item">name :
+						{{ licence.name }}</li>
 					<li class="list-group-item">Description :
-						{{ product.description }}</li>
-					<li class="list-group-item">Année de sortie :
-						{{ product.year }}</li>
+						{{ licence.description }}</li>
+					<li class="list-group-item">Media :
+						{{ licence.media }}</li>
 				</ul>
 			</div>
 		</div>

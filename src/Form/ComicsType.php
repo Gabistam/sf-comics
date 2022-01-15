@@ -2,9 +2,14 @@
 
 namespace App\Form;
 
+use App\Entity\Licence;
+use App\Entity\Designer;
+use App\Entity\Editor;
 use App\Entity\Comics;
 use App\Entity\Writer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
