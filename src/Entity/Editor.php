@@ -29,6 +29,13 @@ class Editor
      */
     private $country;
 
+    private $image;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -49,5 +56,17 @@ class Editor
     public function getCountry(): ?string
     {
         return $this->country;
+    }
+
+    public function getMedia(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setMedia(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

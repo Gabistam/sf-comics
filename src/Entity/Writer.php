@@ -29,6 +29,13 @@ class Writer
      */
     private $country;
 
+    private $image;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +61,18 @@ class Writer
     public function setCountry(string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getMedia(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setMedia(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
