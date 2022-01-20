@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LicenceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,7 +31,12 @@ class Licence
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $media;
+    private $image;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -63,12 +69,12 @@ class Licence
 
     public function getMedia(): ?string
     {
-        return $this->media;
+        return $this->image;
     }
 
-    public function setMedia(string $media): self
+    public function setMedia(string $image): self
     {
-        $this->media = $media;
+        $this->image = $image;
 
         return $this;
     }

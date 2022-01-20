@@ -14,7 +14,7 @@ class DesignerType extends AbstractType
         $builder
             ->add('name')
             ->add('country')
-            ->add('media', FileType::class, [
+            ->add('image', FileType::class, [
                 'mapped' => false
             ])
             ->add('Enregistrer', SubmitType::class);

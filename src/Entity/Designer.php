@@ -34,6 +34,11 @@ class Designer
      */
     private $image;
 
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
